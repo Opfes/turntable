@@ -1,17 +1,13 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class='mainheader'>
     <ion-title>
-      Tab1
+      <ion-title size="large">Turn <ion-icon size='large' name="disc-sharp"></ion-icon> Table</ion-title>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Turn Table</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
 
   <ion-card>
     <ion-card-header>
@@ -20,6 +16,7 @@
     </ion-card-header>
   </ion-card>
 
+  <!--To do: add modal that pops up with offers-->
   <ion-card>
     <img src="assets/afterhoursvinyl.jpg"/>
     <ion-card-header>
@@ -29,5 +26,10 @@
     <ion-card-content>
       Original After Hours vinyl with packaging. Record has been played less than ten times with little wear.
     </ion-card-content>
+    <ion-button class="offerbutton">
+      View Offers
+    </ion-button>
   </ion-card>
+
+  <!--To do: add a little button that allows you to add more listings-->
 </ion-content>
