@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,21 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(public alertController: AlertController){}
+
+  async presentAlert(){
+    const alert = await this.alertController.create({
+      header: 'Pardon my construction',
+      message: 'This feature is unimplemented. It will generate a dialogue box that will allow the user to view offers.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+    let result = await alert.onDidDismiss();
+    console.log(result);
+  }
 
 }
+
+
+

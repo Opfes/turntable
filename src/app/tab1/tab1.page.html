@@ -26,10 +26,16 @@
     <ion-card-content>
       Original After Hours vinyl with packaging. Record has been played less than ten times with little wear.
     </ion-card-content>
-    <ion-button class="offerbutton">
+    
+    <ion-button class="offerbutton" (click)="offerAlert()">
       View Offers
     </ion-button>
   </ion-card>
 
-  <!--To do: add a little button that allows you to add more listings-->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='newListingAlert()'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
