@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { AngularFireStorage } from "@angular/fire/storage";
+import { AngularFirestore } from "@angular/fire/firestore";
 
 
 @Component({
@@ -9,7 +11,11 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab2Page {
 
-  constructor(public alertController: AlertController){}
+  constructor(public alertController: AlertController, public storage: AngularFireStorage, private fireStore: AngularFirestore){
+    
+  }
+  //this.listingsSet =  fireStore.collection<any>('listings');
+  
 
   async presentAlert(){
     const alert = await this.alertController.create({

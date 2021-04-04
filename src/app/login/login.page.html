@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Log In</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title size="large">Turn <ion-icon size='large' name="disc-sharp"></ion-icon> Table</ion-card-title>
+      <ion-card-subtitle>The Used Record Marketplace</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Email:</ion-label>
+        <ion-input #email required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password:</ion-label>
+        <ion-input type="password" #password required></ion-input>
+      </ion-item>
+    </ion-card-content>
+    <ion-card-content>
+
+      <ion-button (click)="logIn(email, password)">
+        Log In
+      </ion-button>
+
+      <ion-button (click)="reset(email)">
+        Reset Password
+      </ion-button>
+  
+      <ion-button [ngStyle]="{ float:'right' }"  [routerLink]="['/tabs']">
+        Cancel
+      </ion-button>
+    </ion-card-content>
+    
+  </ion-card>
+</ion-content>

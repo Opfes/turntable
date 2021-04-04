@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
-import {AlertController} from '@ionic/angular'
+import {AlertController, NavController} from '@ionic/angular';
+import { AuthenticationService } from "../shared/authentication-service";
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
+
 export class Tab1Page {
 
-  constructor(public alertController: AlertController){}
-
+  constructor(public alertController: AlertController, public authService: AuthenticationService){}
+  
+  userLogged: boolean = this.authService.isLoggedIn;
+  userNotLogged: boolean = !this.authService.isLoggedIn;
+  
   async offerAlert(){
     const alert = await this.alertController.create({
       header: 'Pardon my construction',
@@ -17,9 +23,14 @@ export class Tab1Page {
       buttons: ['OK']
     });
 
+    
     await alert.present();
     let result = await alert.onDidDismiss();
     console.log(result);
+  }
+
+  checkLog() {
+    window.alert(this.authService.isLoggedIn);
   }
 
   async newListingAlert(){
@@ -32,6 +43,7 @@ export class Tab1Page {
     await alert.present();
     let result = await alert.onDidDismiss();
     console.log(result);
+    
   }
 
 }

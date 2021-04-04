@@ -11,8 +11,10 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Welcome back, user</ion-card-title>
-      <ion-card-subtitle>Here are your listings</ion-card-subtitle>
+      <ion-card-title *ngIf="userLogged">Welcome back, user</ion-card-title>
+      <ion-card-subtitle *ngIf="userLogged" >Here are your listings</ion-card-subtitle>
+      <ion-card-title *ngIf="userNotLogged">Welcome to Turntable</ion-card-title>
+      <ion-card-subtitle *ngIf="userNotLogged" >Sign in to see your listings.</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
@@ -27,9 +29,22 @@
       Original After Hours vinyl with packaging. Record has been played less than ten times with little wear.
     </ion-card-content>
     
-    <ion-button class="offerbutton" (click)="offerAlert()">
+    <ion-button class="offerbutton" (click)="checkLog()">
       View Offers
     </ion-button>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-button  [routerLink]="['/signup']">
+        Sign Up
+      </ion-button>
+
+      <ion-button [ngStyle]="{ float:'right' }" [routerLink]="['/login']">
+        Log In
+      </ion-button>
+    </ion-card-content>
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

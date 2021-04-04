@@ -14,7 +14,7 @@
   </ion-card>
 
   <ion-card>
-    <img src="assets/tronrecord.jpg"/>
+    <img src='{{cardpath}}'/>
     <ion-card-header>
       <ion-card-title>Tron Legacy Soundtrack</ion-card-title>
       <ion-card-subtitle>$20</ion-card-subtitle>
@@ -22,49 +22,7 @@
     <ion-card-content>
       Original movie soundtrack, only opened, never played.
     </ion-card-content>
-    <ion-button class="offerbutton" (click)='presentAlert()'>
-      Make Offer
-    </ion-button>
-  </ion-card>
-  
-  <ion-card>
-    <img src="assets/ram.jpg"/>
-    <ion-card-header>
-      <ion-card-title>Random Access Memories</ion-card-title>
-      <ion-card-subtitle>$35</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      Unopened, mint condition.
-    </ion-card-content>
-    <ion-button class="offerbutton" (click)='presentAlert()'>
-      Make Offer
-    </ion-button>
-  </ion-card>
-  
-  <ion-card>
-    <img src="assets/tickets.jpeg"/>
-    <ion-card-header>
-      <ion-card-title>Tickets To My Downfall</ion-card-title>
-      <ion-card-subtitle>$15</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      Heavily used, record still works fine. Sleeve corners are a little dog-eared.
-    </ion-card-content>
-    <ion-button class="offerbutton" (click)='presentAlert()'>
-      Make Offer
-    </ion-button>
-  </ion-card>
-  
-  <ion-card>
-    <img src="assets/AM.jpg"/>
-    <ion-card-header>
-      <ion-card-title>After Hours</ion-card-title>
-      <ion-card-subtitle>$30</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      Original After Hours vinyl with packaging. Record has been played less than ten times with little wear.
-    </ion-card-content>
-    <ion-button class="offerbutton" (click)='presentAlert()'>
+    <ion-button class="offerbutton" (click)='checkPath()'>
       Make Offer
     </ion-button>
   </ion-card>
