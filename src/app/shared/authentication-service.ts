@@ -69,6 +69,11 @@ export class AuthenticationService {
     return (user.emailVerified !== false) ? true : false;
   }
 
+  get userReturn(): object {
+    var username = JSON.parse(localStorage.getItem('user'));
+    return username;
+  }
+
   // Auth providers
   AuthLogin(provider) {
     return this.ngFireAuth.signInWithPopup(provider)
@@ -133,6 +138,67 @@ export class AuthenticationService {
       });
     });
     return listingDataArray;
+  }
+
+  pullCollectionDataFromDBForUser() {
+    const listingsRef: AngularFirestoreCollection<any> = this.afStore.collection('listings');
+    var listingDataArray:object[] = [];
+    var username = JSON.parse(localStorage.getItem('user'));
+
+    listingsRef.get().toPromise().then((querySnapshot: QuerySnapshot<any>) =>{
+      
+      querySnapshot.forEach((doc: any) => {
+        var data = doc.data();
+        if (data.postingUID == username.uid){
+          listingDataArray.push(data);
+        }
+        //console.log(typeof(data));
+        //console.log(typeof(listingDataArray));
+        
+      });
+    });
+    return listingDataArray;
+  }
+
+  pullCollectionIDFromDBForUser() {
+    const listingsRef: AngularFirestoreCollection<any> = this.afStore.collection('listings');
+    var listingDataArray:object[] = [];
+    var username = JSON.parse(localStorage.getItem('user'));
+
+    listingsRef.get().toPromise().then((querySnapshot: QuerySnapshot<any>) =>{
+      
+      querySnapshot.forEach((doc: any) => {
+        var data = doc.data();
+        if (data.postingUID == username.uid){
+          listingDataArray.push(doc.id);
+        }
+        //console.log(typeof(data));
+        //console.log(typeof(listingDataArray));
+        
+      });
+    });
+    return listingDataArray;
+  }
+
+  addListing(name, description, price){
+    const listingsRef: AngularFirestoreCollection<any> = this.afStore.collection('listings');
+    const listing: object = {
+      Name: name,
+      Description: description,
+      Price: price,
+      postingUID: this.userData.uid,
+    }
+    return listingsRef.add(listing);
+  }
+
+  deleteListing(id) {
+    const listingsRef: AngularFirestoreDocument<any> = this.afStore.collection('listings').doc(id);
+    listingsRef.delete().then(() => {
+      console.log("Entry Deleted!");
+      window.location.reload();
+    }).catch((error) => {
+      console.error("Error: ", error);
+    });
   }
 }
 

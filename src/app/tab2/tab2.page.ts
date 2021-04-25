@@ -4,24 +4,30 @@ import { AuthenticationService } from "../shared/authentication-service";
 import { AngularFirestore } from "@angular/fire/firestore"
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
+
 export class Tab2Page {
-  listings:object[] = [];
-  constructor(public alertController: AlertController, public authService: AuthenticationService ){
-    
-  }
+  
+
+  listings: Array<dataCatcher>;
+
+  constructor(public alertController: AlertController, public authService: AuthenticationService ){}
   //this.listingsSet =  fireStore.collection<any>('listings');
 
   ngOnInit() {
     this.listings = this.authService.pullCollectionsFromDB();
     console.log(this.listings);
-    
   }
   
+  ionViewWillEnter() {
+    this.listings = this.authService.pullCollectionsFromDB();
+  }
 
   async presentAlert(){
     const alert = await this.alertController.create({
@@ -37,5 +43,8 @@ export class Tab2Page {
 
 }
 
+interface dataCatcher {
+  [key: string]: any  
+}
 
 

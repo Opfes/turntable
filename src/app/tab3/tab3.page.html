@@ -9,29 +9,34 @@
 <ion-content [fullscreen]="true">
   
 
-  <ion-card>
+  <ion-card *ngIf="userLogged">
     <img src="assets/defaultuser.png"/>
     <ion-card-header>
-      <ion-card-title>John Appleseed</ion-card-title>
-      <ion-card-subtitle>@JohnAppleseed</ion-card-subtitle>
+      <ion-card-title>User</ion-card-title>
+      <ion-card-subtitle>{{user.email}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-button (click)='presentAlert()'>
-        Change Account Info
-      </ion-button>
-
       <ion-button (click)='logOut()'>
         Log Out
       </ion-button>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="userLogged">
     <ion-card-header>
       <ion-card-title>Sold Listings</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       Users' sold listings will go here.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!userLogged">
+    <ion-card-header>
+      <ion-card-title>Whoops!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      You aren't logged in, log in to view you account information.
     </ion-card-content>
   </ion-card>
 

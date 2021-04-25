@@ -12,24 +12,23 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label>Email:</ion-label>
-        <ion-input #email required></ion-input>
+        <ion-label>Name:</ion-label>
+        <ion-input #name required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Password:</ion-label>
-        <ion-input type="password" #password required></ion-input>
+        <ion-label>Description:</ion-label>
+        <ion-input #description required></ion-input>
       </ion-item>
-    </ion-card-content>
-    <ion-card-content>
-
-      <ion-button (click)="signUp(email, password)">
-        Sign Up
+      <ion-item>
+        <ion-label>Price:</ion-label>
+        <ion-input #price required></ion-input>
+      </ion-item>
+      <ion-button (click)="submitNewListing(name, description, price)">
+        Add Listing
       </ion-button>
-  
-      <ion-button [ngStyle]="{ float:'right' }"  [routerLink]="['/tabs']">
+      <ion-button [routerLink]="['/tabs']">
         Cancel
       </ion-button>
-    </ion-card-content>
-    
+    </ion-card-content>    
   </ion-card>
 </ion-content>

@@ -17,14 +17,18 @@ export class LoginPage implements OnInit {
   logIn(email, password){
     this.authService.SignIn(email.value, password.value)
     .then((res) => {
-      this.router.navigate(['tabs']);
+      this.router.navigate(['tabs'])
+      .then(() => {
+        window.location.href = window.location.protocol + '//' + window.location.host + '/tabs';
+      });
     }).catch((error) => {
       window.alert(error.message)
     })
-  
   }
 
   reset(email){
     this.authService.PasswordRecover(email.value);
   }
+
+
 }

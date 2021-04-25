@@ -13,42 +13,57 @@
     <ion-card-header>
       <ion-card-title *ngIf="userLogged">Welcome back, user</ion-card-title>
       <ion-card-subtitle *ngIf="userLogged" >Here are your listings</ion-card-subtitle>
-      <ion-card-title *ngIf="userNotLogged">Welcome to Turntable</ion-card-title>
-      <ion-card-subtitle *ngIf="userNotLogged" >Sign in to see your listings.</ion-card-subtitle>
+      <ion-card-title *ngIf="!userLogged">Welcome to Turntable</ion-card-title>
+      <ion-card-subtitle *ngIf="!userLogged" >Sign in to see your listings.</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
   <!--To do: add modal that pops up with offers-->
-  <ion-card>
+  <ion-card *ngIf="!userLogged">
     <img src="assets/afterhoursvinyl.jpg"/>
     <ion-card-header>
-      <ion-card-title>After Hours</ion-card-title>
+      <ion-card-title>Example Card</ion-card-title>
       <ion-card-subtitle>$30</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      Original After Hours vinyl with packaging. Record has been played less than ten times with little wear.
+      This is what your listings will look like!
     </ion-card-content>
     
     <ion-button class="offerbutton" (click)="checkLog()">
       View Offers
     </ion-button>
-
   </ion-card>
 
-  <ion-card *ngIf="userNotLogged" >
+  <ion-item-group [ngStyle]="{ 'margin-top':'-50px'}" *ngIf="userLogged">
+    <ion-card *ngFor="let data of listings; let i = index">
+      <img src='{{data.imglink}}'>
+      <ion-card-header>
+        <ion-card-title>{{data.Name}}</ion-card-title>
+        <ion-card-subtitle>${{data.Price}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{data.Description}}</p>    
+        <ion-button (click)='deleteListing(i)'>
+          Delete Offer
+        </ion-button> 
+      </ion-card-content>
+    </ion-card>
+  </ion-item-group>
+
+  <ion-card *ngIf="!userLogged" >
     <ion-card-content>
-      <ion-button  [routerLink]="['/signup']">
+      <ion-button  (click)="navigateToSignup()">
         Sign Up
       </ion-button>
 
-      <ion-button [ngStyle]="{ float:'right' }" [routerLink]="['/login']">
+      <ion-button [ngStyle]="{ float:'right' }" (click)="navigateToLogin()">
         Log In
       </ion-button>
     </ion-card-content>
   </ion-card>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)='newListingAlert()'>
+  <ion-fab *ngIf="userLogged" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='navigateToNewListing()'>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

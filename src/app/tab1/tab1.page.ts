@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController, NavController} from '@ionic/angular';
 import { AuthenticationService } from "../shared/authentication-service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-tab1',
@@ -10,12 +11,28 @@ import { AuthenticationService } from "../shared/authentication-service";
 
 
 export class Tab1Page {
+  listingIDs: Array<dataCatcher>;
+  listings: Array<dataCatcher>;
+  IDs: Array<dataCatcher>;
 
-  constructor(public alertController: AlertController, public authService: AuthenticationService){}
+  constructor(public alertController: AlertController, public authService: AuthenticationService, public router: Router){}
   
-  userLogged: boolean = this.authService.isLoggedIn;
-  userNotLogged: boolean = !this.authService.isLoggedIn;
+  userLogged: boolean;
+  user: object;
   
+  ngOnInit(){
+    this.userLogged= this.authService.isLoggedIn;
+  }
+
+  ionViewWillEnter() {
+    this.userLogged= this.authService.isLoggedIn;
+    this.listings = this.authService.pullCollectionDataFromDBForUser();
+    this.listingIDs = this.authService.pullCollectionIDFromDBForUser();
+    this.user = this.authService.userReturn;
+    console.log(this.listings);
+    console.log(this.listingIDs);
+  }
+
   async offerAlert(){
     const alert = await this.alertController.create({
       header: 'Pardon my construction',
@@ -29,8 +46,12 @@ export class Tab1Page {
     console.log(result);
   }
 
-  checkLog() {
-    window.alert(this.authService.isLoggedIn);
+  navigateToLogin() {
+    this.router.navigate(['login']);
+  }
+
+  navigateToNewListing() {
+    this.router.navigate(['addlisting']);
   }
 
   async newListingAlert(){
@@ -46,4 +67,14 @@ export class Tab1Page {
     
   }
 
+  deleteListing(i) {
+    var listingID = this.listingIDs[i];
+    console.log(listingID);
+    this.authService.deleteListing(listingID);
+  }
+
+}
+
+interface dataCatcher {
+  [key: string]: any  
 }
