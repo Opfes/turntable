@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { User } from "./auth";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QuerySnapshot } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -105,4 +105,40 @@ export class AuthenticationService {
     })
   }
 
+  pullListingsFromDB() {
+    const userRef: AngularFirestoreDocument<any> = this.afStore.collection('listings').doc('bBKHSLfoTSucVC7q6OlC');
+
+    userRef.get().toPromise().then((doc) => {
+      if (doc.exists) {
+        console.log("Document data: ", doc.data());
+      }else{
+        console.log("Document does not exist.");
+      }
+    }).catch((error) => {
+      console.log("Error getting document:", error);
+    });
+  }
+
+  pullCollectionsFromDB() {
+    const listingsRef: AngularFirestoreCollection<any> = this.afStore.collection('listings');
+    var listingDataArray:object[] = [];
+
+    listingsRef.get().toPromise().then((querySnapshot: QuerySnapshot<any>) =>{
+      
+      querySnapshot.forEach((doc: any) => {
+        var data = doc.data();
+        //console.log(typeof(data));
+        //console.log(typeof(listingDataArray));
+        listingDataArray.push(data);
+      });
+    });
+    return listingDataArray;
+  }
 }
+
+/*listingsRef.get().toPromise().then((querySnapshot: QuerySnapshot<any>) => {
+  querySnapshot.forEach((doc: any) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+}*/

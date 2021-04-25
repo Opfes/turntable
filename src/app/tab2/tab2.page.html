@@ -13,18 +13,18 @@
     </ion-card-header>
   </ion-card>
 
-  <ion-card>
-    <img src='{{cardpath}}'/>
+  <ion-card *ngFor="let data of listings">
+    <img src='{{data.imglink}}'>
     <ion-card-header>
-      <ion-card-title>Tron Legacy Soundtrack</ion-card-title>
-      <ion-card-subtitle>$20</ion-card-subtitle>
+      <ion-card-title>{{data.Name}}</ion-card-title>
+      <ion-card-subtitle>${{data.Price}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      Original movie soundtrack, only opened, never played.
+      <p>{{data.Description}}</p>    
+      <ion-button class="offerbutton" (click)='presentAlert()'>
+        Make Offer
+      </ion-button> 
     </ion-card-content>
-    <ion-button class="offerbutton" (click)='checkPath()'>
-      Make Offer
-    </ion-button>
   </ion-card>
   
 </ion-content>

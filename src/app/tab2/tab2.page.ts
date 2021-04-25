@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { AngularFireStorage } from "@angular/fire/storage";
-import { AngularFirestore } from "@angular/fire/firestore";
-
+import { AuthenticationService } from "../shared/authentication-service";
+import { AngularFirestore } from "@angular/fire/firestore"
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tab2',
@@ -10,11 +10,17 @@ import { AngularFirestore } from "@angular/fire/firestore";
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
-  constructor(public alertController: AlertController, public storage: AngularFireStorage, private fireStore: AngularFirestore){
+  listings:object[] = [];
+  constructor(public alertController: AlertController, public authService: AuthenticationService ){
     
   }
   //this.listingsSet =  fireStore.collection<any>('listings');
+
+  ngOnInit() {
+    this.listings = this.authService.pullCollectionsFromDB();
+    console.log(this.listings);
+    
+  }
   
 
   async presentAlert(){
