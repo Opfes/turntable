@@ -10,13 +10,12 @@ import { AuthenticationService } from "../shared/authentication-service";
 export class Tab3Page {
 
   constructor(public alertController: AlertController, public authService: AuthenticationService) {}
-  user: object;
+  email: string;
   userLogged: boolean;
 
   ionViewWillEnter() {
     this.userLogged= this.authService.isLoggedIn;
-    this.user = this.authService.userReturn;
-    console.log(this.user);
+    this.email = this.authService.emailReturn;
   }
 
   logOut(){
@@ -34,4 +33,18 @@ export class Tab3Page {
     let result = await alert.onDidDismiss();
     console.log(result);
   }
+}
+
+interface userObject {
+  uid: string
+  displayName: string
+  photoURL: string
+  email: string
+  emailVerified: boolean
+  phoneNumber: string
+  isAnonymous: boolean
+  tenantID: string
+  providerData: Array<string>
+  redirectEventId: string
+  stsTokenManager: object //this might need to be Object
 }

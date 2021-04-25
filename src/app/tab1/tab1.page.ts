@@ -18,7 +18,6 @@ export class Tab1Page {
   constructor(public alertController: AlertController, public authService: AuthenticationService, public router: Router){}
   
   userLogged: boolean;
-  user: object;
   
   ngOnInit(){
     this.userLogged= this.authService.isLoggedIn;
@@ -28,7 +27,6 @@ export class Tab1Page {
     this.userLogged= this.authService.isLoggedIn;
     this.listings = this.authService.pullCollectionDataFromDBForUser();
     this.listingIDs = this.authService.pullCollectionIDFromDBForUser();
-    this.user = this.authService.userReturn;
     console.log(this.listings);
     console.log(this.listingIDs);
   }
@@ -48,6 +46,10 @@ export class Tab1Page {
 
   navigateToLogin() {
     this.router.navigate(['login']);
+  }
+
+  navigateToSignup() {
+    this.router.navigate(['signup']);
   }
 
   navigateToNewListing() {

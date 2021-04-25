@@ -69,6 +69,10 @@ export class AuthenticationService {
     return (user.emailVerified !== false) ? true : false;
   }
 
+  get emailReturn(): string {
+    return this.userData.email;
+  }
+
   get userReturn(): object {
     var username = JSON.parse(localStorage.getItem('user'));
     return username;
